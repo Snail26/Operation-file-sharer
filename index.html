@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operation file sharer - login</title>
+    <title id="title">Operation file sharer</title>
 </head>
 <body>
-    
+    <script>
+        const title = document.getElementById("title");
+        if (!getCookie("username") || location.hash != "#login") {
+            location.hash = "login";
+            location.reload();
+            title.innerText = "Operation File Sharer - Login";
+
+        }
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    </script>
 </body>
 </html>
