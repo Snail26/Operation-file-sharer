@@ -8,7 +8,7 @@
 <body>
     <script>
         const title = document.getElementById("title");
-        if (!getCookie("username") || location.hash != "#login") {
+        if (!getCookie("username") && location.hash != "#login") {
             location.hash = "login";
             location.reload();
             title.innerText = "Operation File Sharer - Login";
