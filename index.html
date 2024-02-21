@@ -12,7 +12,10 @@
             location.hash = "login";
             location.reload();
             title.innerText = "Operation File Sharer - Login";
-
+            fetch('').then(r => {
+               let loginStyle = document.createElement("style");
+            loginStyle.innerHTML = r.text();
+            });
         }
         function getCookie(name) {
             const value = `; ${document.cookie}`;
