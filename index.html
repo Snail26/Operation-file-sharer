@@ -4,15 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="title">Operation file sharer</title>
+    <style>
+        #login {
+            background-color: white;
+            text-align: center;
+            display: none;
+        }
+        #dashboard {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div id="login">
+        <div id="login-wrapper">
+            <label for="loginInput">Username: </label>
+            <input id="loginInput" placeholder="Username here">
+        </div>
+    </div>
+    <div id="dashboard">
+        <p id="welcome">welcome</p>
+    </div>
     <script>
         const title = document.getElementById("title");
+        let name = "";
+        if (getCookie("name")) {
+            name = getCookie("name");
+        }
         if (!getCookie("username") && location.hash != "#login") {
-            location.hash = "login";
-            location.reload();
+            newHash("login")
+        }
+        if (location.hash == "#login") {
             title.innerText = "Operation File Sharer - Login";
-
+            document.getElementById("login").style.display = "block";
+            document.getElementById("loginInput").addEventListener("keydown", e => {
+                if (e.key == "Enter") {
+                    name = document.getElementById("loginInput").value;
+                    setCookie("username", name, 999999);
+                    newHash("dashboard");
+                }
+            });
+        }
+        if (location.hash == "#dashboard") {
+            document.getElementById("dashboard").style.display = "block";
+            document.getElementById("welcome").innerText = "Welcome " + name;
         }
         function getCookie(name) {
             const value = `; ${document.cookie}`;
@@ -24,6 +59,10 @@
             d.setTime(d.getTime() + (exdays*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+        function newHash(hash) {
+            location.hash = hash;
+            location.reload();
         }
     </script>
 </body>
