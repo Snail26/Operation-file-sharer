@@ -32,8 +32,9 @@
             name = getCookie("name");
         }
         if (!getCookie("username") && location.hash != "#login") {
-            newHash("login")
+            newHash("login");
         }
+        
         if (location.hash == "#login") {
             title.innerText = "Operation File Sharer - Login";
             document.getElementById("login").style.display = "block";
