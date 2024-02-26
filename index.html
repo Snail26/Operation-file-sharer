@@ -37,18 +37,10 @@
         
         if (location.hash == "#login") {
             title.innerText = "Operation File Sharer - Login";
-            document.getElementById("login").style.display = "block";
-            document.getElementById("loginInput").addEventListener("keydown", e => {
-                if (e.key == "Enter") {
-                    name = document.getElementById("loginInput").value;
-                    setCookie("username", name, 999999);
-                    newHash("dashboard");
-                }
+            fetch('').then(r => {
+               let loginStyle = document.createElement("style");
+            loginStyle.innerHTML = r.text();
             });
-        }
-        if (location.hash == "#dashboard") {
-            document.getElementById("dashboard").style.display = "block";
-            document.getElementById("welcome").innerText = "Welcome " + name;
         }
         function getCookie(name) {
             const value = `; ${document.cookie}`;
